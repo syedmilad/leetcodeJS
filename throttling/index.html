@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Throttling In JavaScript</title>
+  </head>
+  <body>
+    <h1 id="count">0</h1>
+    <button id="myButton">Click Me</button>
+    <script src="./core.js">
+      function throttle(fn, delay) {
+        let lastTime = 0;
+        return function (...args) {
+          const now = Date.now();
+          if (now - lastTime >= delay) {
+            lastTime = now;
+            return fn.apply(this, args);
+          }
+        };
+      }
+
+      let counter = 0;
+      const count = () =>
+        (document.getElementById("count").innerText = ++counter);
+
+      // Create the throttled function once
+      const throttledCount = throttle(count, 1000);
+
+      // Add the click event listener
+      document
+        .getElementById("myButton")
+        .addEventListener("click", throttledCount);
+    </script>
+  </body>
+</html>
