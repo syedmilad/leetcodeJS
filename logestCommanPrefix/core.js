@@ -14,4 +14,21 @@ var longestCommonPrefix = function (strs) {
   return prefix;
 };
 
-console.log(longestCommonPrefix(["flower", "flow", "flight"]));
+// console.log(longestCommonPrefix(["flower", "flow", "flight"]));
+
+var longestCommonPostfix = function (strs) {
+  if (strs.length === 0) return "";
+
+  let postfix = strs[0];
+
+  for (let i = 1; i < strs.length; i++) {
+    while (!strs[i].endsWith(postfix)) {
+      postfix = postfix.slice(1);
+      if (!postfix) return "";
+    }
+  }
+
+  return postfix;
+};
+
+console.log(longestCommonPostfix(["flower", "floatwer", "flightwer"]));
